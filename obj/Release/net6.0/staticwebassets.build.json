@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "9yYPY4Ug6cGmTMH8E5HnPjDJvOT2VlI0QCJt3HS4LiE=",
+  "Source": "Web.Api_Joke",
+  "BasePath": "_content/Web.Api_Joke",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
