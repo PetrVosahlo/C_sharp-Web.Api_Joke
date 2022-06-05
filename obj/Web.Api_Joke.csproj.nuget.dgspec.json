@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dave\\Documents\\C#\\Web.Api_Joke\\Web.Api_Joke.csproj": {}
+    "C:\\Users\\Dave\\Documents\\C#-Web.Api_Joke\\Web.Api_Joke.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dave\\Documents\\C#\\Web.Api_Joke\\Web.Api_Joke.csproj": {
+    "C:\\Users\\Dave\\Documents\\C#-Web.Api_Joke\\Web.Api_Joke.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dave\\Documents\\C#\\Web.Api_Joke\\Web.Api_Joke.csproj",
+        "projectUniqueName": "C:\\Users\\Dave\\Documents\\C#-Web.Api_Joke\\Web.Api_Joke.csproj",
         "projectName": "Web.Api_Joke",
-        "projectPath": "C:\\Users\\Dave\\Documents\\C#\\Web.Api_Joke\\Web.Api_Joke.csproj",
+        "projectPath": "C:\\Users\\Dave\\Documents\\C#-Web.Api_Joke\\Web.Api_Joke.csproj",
         "packagesPath": "C:\\Users\\Dave\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dave\\Documents\\C#\\Web.Api_Joke\\obj\\",
+        "outputPath": "C:\\Users\\Dave\\Documents\\C#-Web.Api_Joke\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Dave\\AppData\\Roaming\\NuGet\\NuGet.Config",

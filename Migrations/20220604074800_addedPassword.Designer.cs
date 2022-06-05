@@ -11,8 +11,8 @@ using Web.Api_Joke;
 namespace Web.Api_Joke.Migrations
 {
     [DbContext(typeof(JokesDbContext))]
-    [Migration("20220527070330_init")]
-    partial class init
+    [Migration("20220604074800_addedPassword")]
+    partial class addedPassword
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,6 +30,10 @@ namespace Web.Api_Joke.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ChangePassword")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -56,8 +60,9 @@ namespace Web.Api_Joke.Migrations
                     b.Property<double>("Temperature")
                         .HasColumnType("float");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<double>("Wind")
                         .HasColumnType("float");
@@ -66,7 +71,7 @@ namespace Web.Api_Joke.Migrations
 
                     b.HasIndex("JokeTypeId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserName");
 
                     b.ToTable("jokes");
                 });
@@ -91,18 +96,15 @@ namespace Web.Api_Joke.Migrations
 
             modelBuilder.Entity("Web.Api_Joke.User", b =>
                 {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
-
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.HasKey("id");
+                    b.HasKey("Name");
 
                     b.ToTable("users");
                 });
@@ -110,20 +112,30 @@ namespace Web.Api_Joke.Migrations
             modelBuilder.Entity("Web.Api_Joke.Joke", b =>
                 {
                     b.HasOne("Web.Api_Joke.JokeType", "JokeType")
-                        .WithMany()
+                        .WithMany("TypeJokes")
                         .HasForeignKey("JokeTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Web.Api_Joke.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
+                        .WithMany("UserJokes")
+                        .HasForeignKey("UserName")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("JokeType");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Web.Api_Joke.JokeType", b =>
+                {
+                    b.Navigation("TypeJokes");
+                });
+
+            modelBuilder.Entity("Web.Api_Joke.User", b =>
+                {
+                    b.Navigation("UserJokes");
                 });
 #pragma warning restore 612, 618
         }

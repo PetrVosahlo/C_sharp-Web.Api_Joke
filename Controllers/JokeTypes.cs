@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Web.Api_Joke.Controllers {
     [Route("[controller]")]
@@ -11,7 +12,7 @@ namespace Web.Api_Joke.Controllers {
 
         [HttpGet]
         public List<JokeType> Get() {
-            return _jokesDbContext.jokeTypes.ToList();
+            return _jokesDbContext.jokeTypes.Include(x=> x.TypeJokes).ToList();
         }
 
         [HttpPost]

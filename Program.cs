@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using Web.Api_Joke;
 
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
 
 builder.Services.AddControllers();// zaji¹»uje dependenci injection - vytváøí instance controlerù
@@ -28,6 +27,12 @@ if (app.Environment.IsDevelopment()) {
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials());
 
 app.UseAuthorization();
 

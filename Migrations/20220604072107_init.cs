@@ -25,13 +25,11 @@ namespace Web.Api_Joke.Migrations
                 name: "users",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_users", x => x.id);
+                    table.PrimaryKey("PK_users", x => x.Name);
                 });
 
             migrationBuilder.CreateTable(
@@ -40,10 +38,11 @@ namespace Web.Api_Joke.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    ChangePassword = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
                     Evaluation = table.Column<double>(type: "float", nullable: false),
                     EvaluationCount = table.Column<int>(type: "int", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     JokeTypeId = table.Column<int>(type: "int", nullable: false),
                     Temperature = table.Column<double>(type: "float", nullable: false),
                     SunRain = table.Column<bool>(type: "bit", nullable: false),
@@ -61,10 +60,10 @@ namespace Web.Api_Joke.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_jokes_users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_jokes_users_UserName",
+                        column: x => x.UserName,
                         principalTable: "users",
-                        principalColumn: "id",
+                        principalColumn: "Name",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -74,9 +73,9 @@ namespace Web.Api_Joke.Migrations
                 column: "JokeTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_jokes_UserId",
+                name: "IX_jokes_UserName",
                 table: "jokes",
-                column: "UserId");
+                column: "UserName");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

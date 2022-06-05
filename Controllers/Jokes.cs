@@ -10,14 +10,13 @@ namespace Web.Api_Joke.Controllers {
             this.jokesService = new JokesService(jokesDbContext);
         }
         [HttpGet]
-        public List<Joke> Get() {
-            return jokesService.GetAll();
+        public List<JokeWithoutPassword> Get() {
+            return jokesService.GetAllJokes();
         }
         [HttpGet("{type}")]
         public IActionResult Get(int type) {
             return jokesService.GetFirstJokeOfType(type);
         }
-        
         [HttpGet("{id}, {type}, {next}")]
         public IActionResult Get(int id, int type, bool next) {
             if (!next) {
@@ -25,19 +24,18 @@ namespace Web.Api_Joke.Controllers {
             } else {
                 return jokesService.GetNextJokeOfType(id, type);
             }
-            
         }
-        [HttpPost]
-        public IActionResult Post(Joke joke) {
-            return jokesService.PostNewJoke(joke);
+        [HttpPost("{pass}")]
+        public IActionResult Post(Joke joke, string pass) {
+            return jokesService.PostNewJoke(joke, pass);
         }
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id) {
-            return jokesService.DeleteJoke(id);
+        [HttpDelete("{id}, {pass}")]
+        public IActionResult Delete(int id, string pass) {
+            return jokesService.DeleteJoke(id, pass);
         }
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, Joke updatedJoke) {
-            return jokesService.PutJoke(id, updatedJoke);
+        [HttpPut("{pass}")]
+        public IActionResult Put(Joke updatedJoke, string pass) {
+            return jokesService.PutJoke(updatedJoke, pass);
         }
     }
 }

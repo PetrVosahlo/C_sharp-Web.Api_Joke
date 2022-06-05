@@ -3,10 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace Web.Api_Joke {
-    public class Joke { // definice tabulky Joke
+    public class JokeWithoutPassword { // definice tabulky Joke
         public int Id { get; set; }
         [StringLength(15)]
-        public string? ChangePassword { get; set; }
         public double Evaluation { get; set; }
         public int EvaluationCount { get; set; }
         public string Content { get; set; }
