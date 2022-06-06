@@ -44,9 +44,9 @@ namespace Web.Api_Joke.Service {
                 return Ok(joke);
             }
         }
-        public IActionResult GetNextJokeOfType(int id, int type) { // vrátí následující vtip daného typu
-            var joke = _jokesDbContext.jokes.Select(x => new Joke { // vytvoří nový objekt třídy Joke
-                Id = x.Id,                              // nalinkování prop třídy Joke na properties nové třídy Joke
+        public IActionResult GetJokeOfId(int id) { // první vtip s JokeTypeId == type
+            var joke = _jokesDbContext.jokes.Select(x => new JokeWithoutPassword { // vytvoří nový objekt třídy JokeWithoutPassword
+                Id = x.Id,                              // nalinkování prop třídy Joke na properties třídy JokeWithoutPassword
                 Evaluation = x.Evaluation,              // do jsonu se pošlou všechny prop třídy JokeWithoutPassword
                 EvaluationCount = x.EvaluationCount,    // bez nalinkování ChangePassword = ChangePassword = x.ChangePassword
                 Content = x.Content,                    // se odešle ChangePassword == null i pokud nová třída je Joke
@@ -57,12 +57,37 @@ namespace Web.Api_Joke.Service {
                 Wind = x.Wind,
                 Snow = x.Snow,
                 Season = x.Season
-            }).Where(x => x.JokeTypeId == type).FirstOrDefault(x => x.Id == id);
+            }).FirstOrDefault(x => x.Id == id);
+            if (joke == null) {
+                return NotFound();
+            } else {
+                return Ok(joke);
+            }
+        }
+
+
+
+        public IActionResult GetNextJokeOfType(int id, int type) { // vrátí následující vtip daného typu
+            var joke = _jokesDbContext.jokes.Where(x => x.JokeTypeId == type).FirstOrDefault(x => x.Id == id);
             if (joke == null) { // kontrola existence vtipu s daným id a typem
                 return GetFirstJokeOfType(type); // první vtip s JokeTypeId == type
             } else {
                 if (_jokesDbContext.jokes.Where(x => x.JokeTypeId == type).OrderBy(x => x.Id).Last() != joke) { // kontrola že vtip není poslední daného typu
-                    var nextJoke = _jokesDbContext.jokes.Where(x => x.JokeTypeId == type).Where(x => x.Id > id).OrderBy(x => x.Id).First(); // vyhledání následujícího vtipu
+                    var nextJoke = _jokesDbContext.jokes
+                        .Select(x => new Joke { // vytvoří nový objekt třídy Joke
+                            Id = x.Id,                              // nalinkování prop třídy Joke na properties nové třídy Joke
+                            Evaluation = x.Evaluation,              // do jsonu se pošlou všechny prop třídy JokeWithoutPassword
+                            EvaluationCount = x.EvaluationCount,    // bez nalinkování ChangePassword = ChangePassword = x.ChangePassword
+                            Content = x.Content,                    // se odešle ChangePassword == null i pokud nová třída je Joke
+                            UserName = x.UserName,
+                            JokeTypeId = x.JokeTypeId,
+                            Temperature = x.Temperature,
+                            SunRain = x.SunRain,
+                            Wind = x.Wind,
+                            Snow = x.Snow,
+                            Season = x.Season
+                        })
+                        .Where(x => x.JokeTypeId == type).Where(x => x.Id > id).OrderBy(x => x.Id).First(); // vyhledání následujícího vtipu
                     return Ok(nextJoke);
                 } else {
                     return GetFirstJokeOfType(type); // první vtip s JokeTypeId == type
@@ -71,27 +96,43 @@ namespace Web.Api_Joke.Service {
         }
 
         public IActionResult GetPreviousJokeOfType(int id, int type) { // vrátí předchozí vtip daného typu
-            var joke = _jokesDbContext.jokes.Select(x => new Joke { // vytvoří nový objekt třídy Joke
-                Id = x.Id,                                  // nalinkování prop třídy Joke na properties nové třídy Joke
-                Evaluation = x.Evaluation,                  // do jsonu se pošlou všechny prop třídy JokeWithoutPassword
-                EvaluationCount = x.EvaluationCount,        // bez nalinkování ChangePassword = ChangePassword = x.ChangePassword
-                Content = x.Content,                        // se odešle ChangePassword == null i pokud nová třída je Joke
-                UserName = x.UserName,
-                JokeTypeId = x.JokeTypeId,
-                Temperature = x.Temperature,
-                SunRain = x.SunRain,
-                Wind = x.Wind,
-                Snow = x.Snow,
-                Season = x.Season
-            }).Where(x => x.JokeTypeId == type).FirstOrDefault(x => x.Id == id);
+            var joke = _jokesDbContext.jokes.Where(x => x.JokeTypeId == type).FirstOrDefault(x => x.Id == id);
             if (joke == null) { // kontrola existence vtipu s daným id a typem
                 return GetFirstJokeOfType(type); // první vtip s JokeTypeId == type
             } else {
                 if (_jokesDbContext.jokes.Where(x => x.JokeTypeId == type).First() != joke) { // kontrola že vtip není první daného typu
-                    var prevJoke = _jokesDbContext.jokes.Where(x => x.JokeTypeId == type).OrderBy(x => x.Id).Where(x => x.Id < id).Last(); // vyhledání předchozího vtipu
+                    var prevJoke = _jokesDbContext.jokes
+                        .Select(x => new Joke { // vytvoří nový objekt třídy Joke
+                            Id = x.Id,                                  // nalinkování prop třídy Joke na properties nové třídy Joke
+                            Evaluation = x.Evaluation,                  // do jsonu se pošlou všechny prop třídy JokeWithoutPassword
+                            EvaluationCount = x.EvaluationCount,        // bez nalinkování ChangePassword = ChangePassword = x.ChangePassword
+                            Content = x.Content,                        // se odešle ChangePassword == null i pokud nová třída je Joke
+                            UserName = x.UserName,
+                            JokeTypeId = x.JokeTypeId,
+                            Temperature = x.Temperature,
+                            SunRain = x.SunRain,
+                            Wind = x.Wind,
+                            Snow = x.Snow,
+                            Season = x.Season
+                        })
+                        .Where(x => x.JokeTypeId == type).OrderBy(x => x.Id).Where(x => x.Id < id).Last(); // vyhledání předchozího vtipu
                     return Ok(prevJoke);
                 } else {
-                    var prevJoke = _jokesDbContext.jokes.Where(x => x.JokeTypeId == type).OrderBy(x => x.Id).Last();// poslední vtip s JokeTypeId == type
+                    var prevJoke = _jokesDbContext.jokes
+                        .Select(x => new Joke { // vytvoří nový objekt třídy Joke
+                            Id = x.Id,                                  // nalinkování prop třídy Joke na properties nové třídy Joke
+                            Evaluation = x.Evaluation,                  // do jsonu se pošlou všechny prop třídy JokeWithoutPassword
+                            EvaluationCount = x.EvaluationCount,        // bez nalinkování ChangePassword = ChangePassword = x.ChangePassword
+                            Content = x.Content,                        // se odešle ChangePassword == null i pokud nová třída je Joke
+                            UserName = x.UserName,
+                            JokeTypeId = x.JokeTypeId,
+                            Temperature = x.Temperature,
+                            SunRain = x.SunRain,
+                            Wind = x.Wind,
+                            Snow = x.Snow,
+                            Season = x.Season
+                        })
+                        .Where(x => x.JokeTypeId == type).OrderBy(x => x.Id).Last();// poslední vtip s JokeTypeId == type
                     return Ok(prevJoke);
                 }
             }

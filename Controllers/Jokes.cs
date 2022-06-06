@@ -2,8 +2,8 @@
 using Web.Api_Joke.Service;
 
 namespace Web.Api_Joke.Controllers {
-    [Route("[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class JokesController : ControllerBase {
         private JokesService jokesService;
         public JokesController(JokesDbContext jokesDbContext) {
@@ -14,9 +14,10 @@ namespace Web.Api_Joke.Controllers {
             return jokesService.GetAllJokes();
         }
         [HttpGet("{type}")]
-        public IActionResult Get(int type) {
+        public IActionResult GetType(int type) {
             return jokesService.GetFirstJokeOfType(type);
         }
+
         [HttpGet("{id}, {type}, {next}")]
         public IActionResult Get(int id, int type, bool next) {
             if (!next) {
@@ -36,6 +37,18 @@ namespace Web.Api_Joke.Controllers {
         [HttpPut("{pass}")]
         public IActionResult Put(Joke updatedJoke, string pass) {
             return jokesService.PutJoke(updatedJoke, pass);
+        }
+    }
+    [Route("[controller]")]
+    public class EditController : ControllerBase {
+        private JokesService jokesService;
+        public EditController(JokesDbContext jokesDbContext) {
+            this.jokesService = new JokesService(jokesDbContext);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetId(int id) {
+            return jokesService.GetJokeOfId(id);
         }
     }
 }
