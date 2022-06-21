@@ -21,7 +21,7 @@ namespace Web.Api_Joke.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Web.Api_Joke.Joke", b =>
+            modelBuilder.Entity("Web.Api_Joke.Joke_General", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -46,24 +46,9 @@ namespace Web.Api_Joke.Migrations
                     b.Property<int>("JokeTypeId")
                         .HasColumnType("int");
 
-                    b.Property<byte>("Season")
-                        .HasColumnType("tinyint");
-
-                    b.Property<bool>("Snow")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("SunRain")
-                        .HasColumnType("bit");
-
-                    b.Property<double>("Temperature")
-                        .HasColumnType("float");
-
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<double>("Wind")
-                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -71,7 +56,50 @@ namespace Web.Api_Joke.Migrations
 
                     b.HasIndex("UserName");
 
-                    b.ToTable("jokes");
+                    b.ToTable("jokes_General");
+                });
+
+            modelBuilder.Entity("Web.Api_Joke.Joke_Weather", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Evaluation")
+                        .HasColumnType("float");
+
+                    b.Property<int>("EvaluationCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Season")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("Temperature")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("WeatherType")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.Property<string>("WindSpeed")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("jokes_Weather");
                 });
 
             modelBuilder.Entity("Web.Api_Joke.JokeType", b =>
@@ -107,7 +135,7 @@ namespace Web.Api_Joke.Migrations
                     b.ToTable("users");
                 });
 
-            modelBuilder.Entity("Web.Api_Joke.Joke", b =>
+            modelBuilder.Entity("Web.Api_Joke.Joke_General", b =>
                 {
                     b.HasOne("Web.Api_Joke.JokeType", "JokeType")
                         .WithMany("TypeJokes")

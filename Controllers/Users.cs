@@ -13,19 +13,14 @@ namespace Web.Api_Joke.Controllers {
 
         [HttpGet]
         public List<UserWithoutPassword> Get() {
-            var tabJokes = _jokesDbContext.jokes; // instance tabulky jokes
+            var tabJokes = _jokesDbContext.jokes_General; // instance tabulky jokes
             var UserJokesNoPassword = tabJokes.Select(x => new JokeWithoutPassword { // vytvoří nový objekt třídy JokeWithoutPassword
                 Id = x.Id,                                  // nalinkování prop třídy Joke na properties třídy JokeWithoutPassword
                 Evaluation = x.Evaluation,                  // do jsonu se pošlou všechny prop třídy JokeWithoutPassword
                 EvaluationCount = x.EvaluationCount,        // bez nalinkování ChangePassword = ChangePassword = x.ChangePassword
                 Content = x.Content,                        // se odešle ChangePassword == null i pokud nová třída je Joke
                 UserName = x.UserName,
-                JokeTypeId = x.JokeTypeId,
-                Temperature = x.Temperature,
-                SunRain = x.SunRain,
-                Wind = x.Wind,
-                Snow = x.Snow,
-                Season = x.Season
+                JokeTypeId = x.JokeTypeId
             });
 
             return _jokesDbContext.users.Include(x => x.UserJokes) // připojení záznamů tabulky UserJokes k tabulce User

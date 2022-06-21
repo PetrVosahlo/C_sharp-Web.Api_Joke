@@ -27,7 +27,7 @@ namespace Web.Api_Joke.Controllers {
             }
         }
         [HttpPost("{pass}")]
-        public IActionResult Post(Joke joke, string pass) {
+        public IActionResult Post(Joke_General joke, string pass) {
             return jokesService.PostNewJoke(joke, pass);
         }
         [HttpDelete("{id}, {pass}")]
@@ -35,7 +35,7 @@ namespace Web.Api_Joke.Controllers {
             return jokesService.DeleteJoke(id, pass);
         }
         [HttpPut("{pass}")]
-        public IActionResult Put(Joke updatedJoke, string pass) {
+        public IActionResult Put(Joke_General updatedJoke, string pass) {
             return jokesService.PutJoke(updatedJoke, pass);
         }
     }

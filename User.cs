@@ -9,6 +9,6 @@ namespace Web.Api_Joke { // definice tabulky User
         public string Name { get; set; }
         [StringLength(30)] // maximální velikost password je 30 znaků
         public string Password { get; set; } = String.Empty;
-        public ICollection<Joke>? UserJokes { get; set; }
+        public ICollection<Joke_General>? UserJokes { get; set; }
     }
 }

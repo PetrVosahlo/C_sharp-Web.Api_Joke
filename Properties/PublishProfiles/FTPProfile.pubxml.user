@@ -8,7 +8,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword />
     <_PublishTargetUrl>ftp://petrv.somee.com/www.petrv.somee.com</_PublishTargetUrl>
-    <History>True|2022-05-27T09:18:57.2268599Z;True|2022-05-24T09:29:27.0309652+02:00;False|2022-05-24T09:23:55.8584600+02:00;True|2022-05-24T09:18:55.9457035+02:00;False|2022-05-24T09:02:17.9846063+02:00;True|2022-05-23T14:04:12.1869306+02:00;</History>
+    <History>True|2022-06-21T06:52:11.0252055Z;True|2022-06-06T12:31:44.3733208+02:00;True|2022-06-06T12:07:08.1844969+02:00;True|2022-05-27T11:18:57.2268599+02:00;True|2022-05-24T09:29:27.0309652+02:00;False|2022-05-24T09:23:55.8584600+02:00;True|2022-05-24T09:18:55.9457035+02:00;False|2022-05-24T09:02:17.9846063+02:00;True|2022-05-23T14:04:12.1869306+02:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <EFMigrations Include="Web.Api_Joke.JokesDbContext">
@@ -20,7 +20,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/18/2022 11:02:52</publishTime>
     </File>
     <File Include="appsettings.json">
-      <publishTime>05/27/2022 11:14:45</publishTime>
+      <publishTime>06/21/2022 08:21:19</publishTime>
     </File>
     <File Include="Microsoft.Data.SqlClient.dll">
       <publishTime>09/21/2021 01:59:32</publishTime>
@@ -63,6 +63,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Microsoft.Win32.SystemEvents.dll">
       <publishTime>11/15/2019 09:36:56</publishTime>
+    </File>
+    <File Include="Newtonsoft.Json.dll">
+      <publishTime>03/17/2021 21:03:36</publishTime>
     </File>
     <File Include="runtimes/unix/lib/netcoreapp3.0/System.Drawing.Common.dll">
       <publishTime>11/15/2019 09:56:36</publishTime>
@@ -131,22 +134,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/15/2019 09:56:52</publishTime>
     </File>
     <File Include="Web.Api_Joke.deps.json">
-      <publishTime>05/27/2022 11:16:04</publishTime>
+      <publishTime>06/21/2022 08:51:23</publishTime>
     </File>
     <File Include="Web.Api_Joke.dll">
-      <publishTime>05/27/2022 11:15:50</publishTime>
+      <publishTime>06/21/2022 08:50:56</publishTime>
     </File>
     <File Include="Web.Api_Joke.exe">
-      <publishTime>05/27/2022 11:15:50</publishTime>
+      <publishTime>06/21/2022 08:50:57</publishTime>
     </File>
     <File Include="Web.Api_Joke.pdb">
-      <publishTime>05/27/2022 11:15:50</publishTime>
+      <publishTime>06/21/2022 08:50:56</publishTime>
     </File>
     <File Include="Web.Api_Joke.runtimeconfig.json">
-      <publishTime>05/18/2022 14:58:13</publishTime>
+      <publishTime>06/21/2022 08:50:58</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>05/27/2022 11:16:04</publishTime>
+      <publishTime>06/21/2022 08:51:23</publishTime>
     </File>
   </ItemGroup>
 </Project>
