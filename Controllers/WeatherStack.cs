@@ -27,15 +27,15 @@ namespace Web.Api_Joke.Controllers {
             return weatherStackService.GetJokeForWeatherPreviousNext(weather_code, temperature, wind_speed, jokeId, next);
         }
     }
-    [Route("weather/[controller]")]
-    public class WeatherTestController : ControllerBase {
-        internal WeatherStackService weatherStackService;
-        public WeatherTestController(JokesDbContext jokesDbContext) {
-            this.weatherStackService = new WeatherStackService(jokesDbContext);
-        }
-        [HttpGet("{weather_code}")]
-        public IActionResult GetWeatherPreviousNext(int weather_code) {
-            return weatherStackService.TestJokeForWeather(weather_code, 38, 25, 1, true);
-        }
-    }
+    //[Route("weather/[controller]")]
+    //public class WeatherTestController : ControllerBase {
+    //    internal WeatherStackService weatherStackService;
+    //    public WeatherTestController(JokesDbContext jokesDbContext) {
+    //        this.weatherStackService = new WeatherStackService(jokesDbContext);
+    //    }
+    //    [HttpGet("{weather_code}")]
+    //    public IActionResult GetWeatherPreviousNext(int weather_code) {
+    //        return weatherStackService.TestJokeForWeather(weather_code, 38, 25, 1, true);
+    //    }
+    //}
 }

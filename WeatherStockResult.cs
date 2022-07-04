@@ -1,39 +1,39 @@
 ﻿namespace Web.Api_Joke {
     public class WeatherStockResult {
-        public int weather_code;
-        public string description;
-        public string pictureAddress;
-        public double temperature;
-        public double windSpeed;
-        public double humidity;
-        public int id;
-        public string content;
-        public string userName;
+        public int Weather_code { get; set; }
+        public string Description { get; set; }
+        public string PictureAddress { get; set; }
+        public double Temperature { get; set; }
+        public double WindSpeed { get; set; }
+        public double Humidity { get; set; }
+        public int Id { get; set; }
+        public string Content { get; set; }
+        public string UserName { get; set; }
         public WeatherStockResult(WeatherStockModel weatherStockModel, Joke_Weather joke_Weather) {
-            this.weather_code = weatherStockModel.Current.Weather_code;
-            this.description = getCzechDescription();
-            this.pictureAddress = getPicture();
-            this.temperature = weatherStockModel.Current.Temperature;
-            this.windSpeed = weatherStockModel.Current.Wind_speed;
-            this.humidity = weatherStockModel.Current.humidity;
-            this.id = joke_Weather.Id;
-            this.content = joke_Weather.Content;
-            this.userName = "Petr";
+            this.Weather_code = weatherStockModel.Current.Weather_code;
+            this.Description = getCzechDescription();
+            this.PictureAddress = getPicture();
+            this.Temperature = weatherStockModel.Current.Temperature;
+            this.WindSpeed = weatherStockModel.Current.Wind_speed;
+            this.Humidity = weatherStockModel.Current.humidity;
+            this.Id = joke_Weather.Id;
+            this.Content = joke_Weather.Content;
+            this.UserName = "Petr";
         }
         public WeatherStockResult(int weather_code, double temperature, double wind_speed, Joke_Weather joke_Weather) {
-            this.weather_code = weather_code;
-            this.description = getCzechDescription();
-            this.pictureAddress = getPicture();
-            this.temperature = temperature;
-            this.windSpeed = wind_speed;
-            this.humidity = 70;
-            this.id = joke_Weather.Id;
-            this.content = joke_Weather.Content;
-            this.userName = "Petr";
+            this.Weather_code = weather_code;
+            this.Description = getCzechDescription();
+            this.PictureAddress = getPicture();
+            this.Temperature = temperature;
+            this.WindSpeed = wind_speed;
+            this.Humidity = 70;
+            this.Id = joke_Weather.Id;
+            this.Content = joke_Weather.Content;
+            this.UserName = "Petr";
         }
         private string getPicture() {
             string picture = "";
-            switch (weather_code) {
+            switch (Weather_code) {
                 case 113: picture = "113_Sunny.jpg"; break;
                 case 116: picture = "116_PartlyCloudy.jpg"; break;
                 case 143: picture = "143_Mist.jpg"; break;
@@ -88,7 +88,7 @@
         }
         private string getCzechDescription() {
             string description = "";
-            switch (weather_code) {
+            switch (Weather_code) {
                 case 113: description = "Slunečno"; break;
                 case 116: description = "Částečně oblačno"; break;
                 case 143: description = "Opar"; break;
